@@ -1,0 +1,21 @@
+name: Hello World Workflow # Workflows are automated processes that you add to a repository.
+
+on: 
+    push: 
+        branches:
+            - main # This triggers the workflow on every push to the main branch
+    pull_request:
+        branches:
+            - main # This triggers the workflow on every pull request for the main branch
+    workflow_dispatch: # Allows you to manually trigger from the Actions tab or via API.
+
+jobs: # Jobs are a collection of steps associated with a runner
+  say_hello: # This is the ID of the job
+    runs-on: ubuntu-latest # This specifies the type of runner that the job will run on
+
+    steps: # Steps are individual tasks that run commands
+    - name: Set up environment # This step sets up the job environment
+      run: echo "NAME=World" >> $GITHUB_ENV # This command creates an environment variable named NAME with the value 'World'
+
+    - name: Print name # This step prints the name to the console
+      run: echo "Hello ${{ env.NAME }}" # This command prints 'Hello World' to the console
