@@ -29,7 +29,8 @@ SENSITIVE_DATA = 'FLAGTHATNEEDSTOBEFOUND'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pygoat.herokuapp.com', '0.0.0.0.']
+# Allow AWS App Runner to serve the application
+ALLOWED_HOSTS = ['.awsapprunner.com']
 
 
 # Application definition
@@ -141,6 +142,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL = '/'
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage,"
+    },
+}
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
