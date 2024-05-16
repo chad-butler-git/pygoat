@@ -7,3 +7,10 @@ venv
 *db.sqlite3*
 app.log
 bin
+*.log
+*.pot 
+*.pyc
+__pycache__
+db.sqlite3
+media
+staticfiles
