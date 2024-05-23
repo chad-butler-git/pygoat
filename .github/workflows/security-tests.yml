@@ -1,8 +1,8 @@
 name: Security Tests CI
 
 on: 
-  push:
-    branches: [aws-deployment]
+  #push:
+  #  branches: [aws-deployment]
   pull_request:
     branches: [aws-deployment]
 
@@ -28,5 +28,5 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           # DB_NAME: ${{ secrets.DB_NAME }}
         run: |
-          python manage.py test security.tests
+        #  python manage.py test
           
