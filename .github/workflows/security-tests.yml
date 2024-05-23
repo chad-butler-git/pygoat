@@ -8,23 +8,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-22.04
-    # strategy:
-    #  max-parallel: 4
-    #  matrix:
-    #    python-version: [3.12.3]
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      #- name: local act python setup fix
-        #run: |
-          # Hack to get setup-python to work on act
-          # (see https://github.com/nektos/act/issues/251)
-          #if [ ! -f "/etc/lsb-release" ] ; then
-          #  echo "DISTRIB_RELEASE=22.04" > /etc/lsb-release
-          #fi
-          #apt update
-          #apt install glibc-source -y
+
       - name: Set Up Python 
         uses: actions/setup-python@v2
         with:
