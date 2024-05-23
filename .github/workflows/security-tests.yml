@@ -28,5 +28,5 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           # DB_NAME: ${{ secrets.DB_NAME }}
         run: |
-          python manage.py test core.tests
+          python manage.py test security.tests
           
