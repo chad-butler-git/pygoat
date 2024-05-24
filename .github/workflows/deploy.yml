@@ -11,14 +11,14 @@ jobs:
     
         steps:
         - name: Deploy to EC2
-            uses: appleboy/ssh-action@master
-            with:
-                host: ${{ secrets.HOST }} # Server IP address
-                username: ${{ secrets.USERNAME }} # username for SSH login (e.g. ubuntu)
-                key: ${{ secrets.KEY }} # private key of SSH user
-                port: ${{ secrets.PORT }} # ssh port, default is 22
-                script: |
-                    cd ${{ secrets.PROJECT_PATH }} # path of the project on the server (e.g. /home/ubuntu/pygoat)
-                    git pull ${{ secrets.REPO }} # github repo address (e.g. https://github.com/chad-butler-git/pygoat.git)
-                    docker-compose down
-                    docker-compose up -build -d
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ secrets.HOST }} # Server IP address
+            username: ${{ secrets.USERNAME }} # username for SSH login (e.g. ubuntu)
+            key: ${{ secrets.KEY }} # private key of SSH user
+            port: ${{ secrets.PORT }} # ssh port, default is 22
+            script: |
+                cd ${{ secrets.PROJECT_PATH }} # path of the project on the server (e.g. /home/ubuntu/pygoat)
+                git pull ${{ secrets.REPO }} # github repo address (e.g. https://github.com/chad-butler-git/pygoat.git)
+                docker-compose down
+                docker-compose up -build -d
