@@ -24,3 +24,4 @@ jobs:
                 sudo systemctl start nginx
                 source venv/bin/activate
                 nohup python3 manage.py runserver &
+                echo "DONE"
