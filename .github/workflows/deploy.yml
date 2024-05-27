@@ -20,5 +20,7 @@ jobs:
             script: |
                 cd ${{ secrets.PROJECT_PATH }} # path of the project on the server (e.g. /home/ubuntu/pygoat)
                 git pull ${{ secrets.REPO }} # github repo address (e.g. https://github.com/chad-butler-git/pygoat.git)
-                docker-compose down
-                docker-compose up -build -d
+                sudo systemctl stop nginx
+                sudo systemctl start nginx
+                source venv/bin/activate
+                python3 manage.py runserver
