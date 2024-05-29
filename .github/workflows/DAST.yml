@@ -7,7 +7,7 @@ on:
 jobs:
   zap_baseline_scan:
     runs-on: ubuntu-latest
-    name: Scan the application
+    name: ZAP Baseline Scan
     steps:
       - name: Get GitHub Action IP
         id: ip
@@ -18,7 +18,7 @@ jobs:
           echo "AWS_DEFAULT_REGION=us-west-2" >> "$GITHUB_ENV"
           echo "AWS_SG_NAME=launch-wizard-2" >> "$GITHUB_ENV"
 
-      - name: Add GitHub Actions IP to SG
+      - name: Add GitHub Actions IP to AWS Security Group
         run: |
           aws ec2 authorize-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --protocol tcp --port 80 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
         env:
@@ -26,7 +26,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ env.AWS_DEFAULT_REGION }}
           
-      - name: ZAP Scan
+      - name: Run ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.12.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
           # rules_file_name: '.zap/rules.tsv'
           # cmd_options: '-a'
 
-      - name: Remove GitHub Actions IP from SG
+      - name: Remove GitHub Actions IP from AWS Security Group
         run: |
           aws ec2 revoke-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --protocol tcp --port 80 --cidr ${{ steps.ip.outputs.ipv4 }}/32
         env:
